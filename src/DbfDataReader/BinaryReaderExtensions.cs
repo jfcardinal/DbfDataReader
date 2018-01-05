@@ -10,30 +10,25 @@ namespace DbfDataReader
         public static short ReadBigEndianInt16(this BinaryReader binaryReader)
         {
             var bytes = binaryReader.ReadBytes(2);
-            Array.Reverse(bytes);
-            return BitConverter.ToInt16(bytes, 0);
+            return (short)((bytes[0] << 8) | bytes[1]);
         }
 
         public static ushort ReadBigEndianUInt16(this BinaryReader binaryReader)
         {
             var bytes = binaryReader.ReadBytes(2);
-            Array.Reverse(bytes);
-            return BitConverter.ToUInt16(bytes, 0);
+            return (ushort)((bytes[0] << 8) | bytes[1]);
         }
 
         public static int ReadBigEndianInt32(this BinaryReader binaryReader)
         {
             var bytes = binaryReader.ReadBytes(4);
-            Array.Reverse(bytes);
-            return BitConverter.ToInt32(bytes, 0);
+            return (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3];
         }
-
 
         public static uint ReadBigEndianUInt32(this BinaryReader binaryReader)
         {
             var bytes = binaryReader.ReadBytes(4);
-            Array.Reverse(bytes);
-            return BitConverter.ToUInt32(bytes, 0);
+            return (uint)((bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3]);
         }
 
         public static string ReadString(this BinaryReader binaryReader, int fieldLength)
